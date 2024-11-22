@@ -1,0 +1,38 @@
+{% for elemento in messages %}
+    <h1>{{elemento}}</h1>
+{% endfor %}
+<table border="1">
+  <style>
+    thead{
+      font-family: Arial, sans-serif;
+        background-color: rgb(61, 14, 233);
+	       margin: 0px;
+        }
+      thead td{
+        
+        color: aliceblue;
+      }
+      tbody td{
+        font-family: Arial, sans-serif;
+      }
+  </style>
+  <thead>
+    <tr>
+       <td><em> Nome do Remedio</em></td>
+       <td><em>Laboratorio</em></td>
+       <td><em>Bula</em></td>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {% for valor in remedio %}
+    <tr>
+        <td>{{valor.nome}}</td>
+        <td>{{valor.laboratorio}}</td>
+        <td>{{valor.bula}}</td>
+        
+        
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

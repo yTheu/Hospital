@@ -1,0 +1,45 @@
+{% for elemento in messages %}
+    <h1>{{elemento}}</h1>
+{% endfor %}
+<table border="1">
+  <style>
+    thead{
+      font-family: Arial, sans-serif;
+        background-color: rgb(61, 14, 233);
+	       margin: 0px;
+        }
+      thead td{
+        
+        color: aliceblue;
+      }
+      tbody td{
+        font-family: Arial, sans-serif;
+      }
+  </style>
+  <thead>
+    <tr> <!--linha de cabeçalho-->
+      <td>Nome</td>
+      <td>CPF</td>
+      <td>Situação</td>
+      <td>Sintoma</td>
+      <td>Data de nascimento</td>
+      <td>Endereço</td>
+      <td>Telefone</td>
+      <td>Telefone Secundário</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for valor in paciente %}
+    <tr>
+      <td>{{valor.nome}}</td>
+      <td>{{valor.cpf}}</td>
+      <td>{{valor.situacao}}</td>
+      <td>{{valor.sintoma}}</td>
+      <td>{{valor.data_nascimento}}</td>
+      <td>{{valor.endereco}}</td>
+      <td>{{valor.telefone}}</td>
+      <td>{{valor.telefone_secundario}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

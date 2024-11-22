@@ -27,7 +27,7 @@ class Médico(models.Model):
     endereco = models.CharField(max_length=250, blank=False)
     telefone = models.CharField(max_length=10, blank = False)
 
-class Secretária(models.Model):
+class Enfermeira(models.Model):
     nome = models.CharField(max_length=100, blank=False)
     cpf = models.CharField(max_length=11, blank=False)
     disponibilidade = models.BooleanField()
@@ -42,6 +42,6 @@ class Remédio(models.Model):
 class Consulta(models.Model):
     id_paciente = models.ForeignKey(Paciente, on_delete = models.PROTECT)
     doença = models.CharField(max_length=100, blank=False)
-    id_secretaria = models.ForeignKey(Secretária, on_delete = models.PROTECT)
+    id_enfermeira = models.ForeignKey(Enfermeira, on_delete = models.PROTECT)
     id_medico = models.ForeignKey(Médico, on_delete = models.PROTECT)
     id_medicação = models.ForeignKey(Remédio, on_delete = models.PROTECT)

@@ -1,0 +1,39 @@
+{% for enfermeira in messages %}
+{% endfor %}
+<table border="1">
+  <style>
+    thead{
+      font-family: Arial, sans-serif;
+        background-color: rgb(61, 14, 233);
+	       margin: 0px;
+        }
+      thead td{
+        
+        color: aliceblue;
+      }
+      tbody td{
+        font-family: Arial, sans-serif;
+      }
+  </style>
+  <thead>
+    <tr>
+       <td>Nome</td>
+       <td>CPF</td>
+       <td>disponibilidade</td>
+       <td>endereço</td>
+       <td>telefone</td>
+    </tr> 
+  </thead>
+  <tbody>
+    {% for valor in enfermeira %}
+    <tr>
+        <td>{{valor.nome}}</td>
+        <td>{{valor.cpf}}</td>
+        <td>{{valor.disponibilidade}}</td>
+        <td>{{valor.endereco}}</td>
+        <td>{{valor.telefone}}</td>
+        
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
