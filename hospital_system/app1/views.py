@@ -7,8 +7,8 @@ def index(request):
 def triagem(request):
     return render(request,'triagem.html')
 
-def cadastros(request):
-    return render(request, 'Cadastro.html')
+def consultas(request):
+    return render(request, 'Consultas.html')
 
 def medicos(request):
     return render(request,'Medicos.html',{'medico':Médico.objects.all()})
@@ -22,5 +22,5 @@ def pacientes(request):
 def remedios(request):
     return render(request,'Remedios.html',{'remedio':Remédio.objects.all()})
 
-def consultas(request):
+def consulta(request):
     return render(request,'Consultas.html',{'consulta':Consulta.objects.all()})
