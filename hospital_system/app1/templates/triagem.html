@@ -130,45 +130,19 @@
 
     <section>
         <h1>Formulário de Triagem</h1>  
-        <form method="post" action="Pacientes.html">
+       
+            {% if messages %}
+            {% for message in messages %}
+                <p style="color: green;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
             {% csrf_token %}
-            <label style="color: red; font-weight: normal;"><span>*</span> Indica uma pergunta obrigatória</label>
-            <label for="nome"><span>*</span>Nome:</label>
-            <input name="nome" id="nome" type="text" value="{{Paciente.nome}}" required>
-
-            <label for="CPF"><span>*</span>CPF:</label>
-            <input name="cpf" id="CPF" type="number"  value="{{Paciente.cpf}}"required placeholder="Somente números">
-
-            <label for="ncelular"><span>*</span>N° de Celular:</label>
-            <input name="ncelular" id="ncelular" type="tel" value="{{Paciente.ncelular}}" pattern="[0-9]{11}" required>
-
-            <label for="ncelular_sec"><span>*</span>N° de Celular Secundário:</label>
-            <input name="ncelular_sec" id="ncelular_sec" type="tel"  value="{{Paciente.ncelular_sec}}" pattern="[0-9]{11}" required>
-
-            <label for="endereco"><span>*</span>Endereço:</label>
-            <input name="endereco" id="endereco" type="text" value="{{Paciente.endereco}}" maxlength="100" required>
-
-            <label for="sexo"><span>*</span>Sexo:</label>
-            <select name="sexo" id="sexo" value="{{Paciente.sexo}}" required>
-                <option>Masculino</option>
-                <option>Feminino</option>
-            </select>
-
-            <label for="email">Email:</label>
-            <input name="email" id="email"  value="{{Paciente.email}}"type="email">
-
-            <label for="data_nascimento"><span>*</span>Data de Nascimento:</label>
-            <input name="data_nascimento" id="data_nascimento"  value="{{Paciente.data_nascimento}}"type="date" required>
-
-            <label for="sintomas"><span>*</span>Sintomas:</label>
-            <textarea name="sintomas" id="sintomas" rows="5" cols="15"  value="{{Paciente.sintomas}}"placeholder="Como você tem se sentido esses dias?" required></textarea>
+            {{ form.as_p }}
             
-            <label>
-                <input type="checkbox" required><a href=""> <span>*</span>Aceito os Termos de Acesso</a>
-            </label>
-            
-            <input type="submit" value="Cadastrar">
+            <button type="submit">Cadastrar</button>
         </form>
+        
     </section>
 
     <footer>

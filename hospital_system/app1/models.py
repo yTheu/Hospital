@@ -7,7 +7,7 @@ class Paciente(models.Model):
         GRAVE = 'grave', 'grave'
 
     nome = models.CharField(max_length=100, blank=False)
-    sintoma = models.CharField(max_length=10, blank=False)
+    sintoma = models.CharField(max_length=300, blank=False)
     situacao = models.CharField(max_length=10, choices=Situacao.choices, default=Situacao.LEVE, blank=False)
     cpf = models.CharField(max_length=11, blank=False)
     data_nascimento = models.DateField(blank=False)

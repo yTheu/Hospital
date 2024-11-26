@@ -5,8 +5,8 @@ from app1.forms import UsuarioForm
 def index(request):
     return render(request,'index.html')
 
-#def triagem(request):
-  #  return render(request,'triagem.html')
+def triagem(request):
+   return render(request,'triagem.html')
 
 def consultas(request):
     return render(request, 'Consultas.html')
@@ -39,4 +39,4 @@ def cadastrar_usuario(request):
             return redirect('cadastrar_usuario')
     else:
         form = UsuarioForm()
-    return render(request, 'cadastros.html', {'form': form})
+    return render(request, 'triagem.html', {'form': form})
