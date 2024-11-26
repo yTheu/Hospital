@@ -1,7 +1,7 @@
 {% for elemento in messages %}
     <h1>{{elemento}}</h1>
 {% endfor %}
-<table border="1">
+
   
   <style>
     thead{
@@ -11,9 +11,10 @@
         }
       thead td{
         
-        color: aliceblue;
+        color: rgb(255, 255, 255);
       }
       tbody td{
+        color: #000000f8;
         font-family: Arial, sans-serif;
       }
   </style>
@@ -46,7 +47,7 @@
     }
 
     nav ul li a {
-        color: #e2e2e2;
+        color: #f5f5f5;
         text-decoration: none;
         font-size: 18px;
         transition: color 0.3s;
@@ -59,8 +60,8 @@
     section {
         margin: 20px auto;
         padding: 20px;
-        max-width: 600px;
-        background-color: #ffffff;
+        max-width: 900px;
+        background-color: #fffffff8;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -85,7 +86,7 @@
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
-        border: 1px solid #ccc;
+        border: 89px  #eeebeb;
         border-radius: 5px;
         font-size: 16px;
     }
@@ -101,7 +102,7 @@
 
     input[type="submit"] {
         background-color: #337ab7;
-        color: #fff;
+        color: #fdfdfd;
         font-size: 18px;
         border: none;
         cursor: pointer;
@@ -116,7 +117,7 @@
 
     footer {
         background-color: #337ab7;
-        color: white;
+        color: rgb(254, 251, 251);
         text-align: center;
         padding: 20px 0;
         margin-top: 20px;
@@ -125,10 +126,10 @@
     footer .footer {
         font-size: 14px;
     }
-</style>
-</head>
-<body>
-<header>
+ </style>
+ </head>
+ <body>
+ <header>
     <nav>
         <ul>
             <li><a href="in">Início</a></li>
@@ -139,7 +140,10 @@
             <li><a href="remedios">Remédios</a></li>
         </ul>
     </nav>
-</header>
+ </header>
+
+<section>
+ <table border="1">
   <thead>
     <tr> <!--linha de cabeçalho-->
       <td>Nome</td>
@@ -162,8 +166,13 @@
       <td>{{valor.data_nascimento}}</td>
       <td>{{valor.endereco}}</td>
       <td>{{valor.telefone}}</td>
-      <td>{{valor.telefone_secundario}}</td>
-    </tr>
+      <td>{{valor.telefone_familiar}}</td>
+    </tr> 
+</section>   
     {% endfor %}
   </tbody>
-</table>
+ </table>
+
+<footer>
+    <div class="footer">Todos os direitos reservados &copy; 2024</div>
+</footer>

@@ -1,7 +1,7 @@
 {% for elemento in messages %}
     <h1>{{elemento}}</h1>
 {% endfor %}
-<table border="1">
+
   <style>
     thead{
       font-family: Arial, sans-serif;
@@ -141,6 +141,8 @@
         </ul>
     </nav>
 </header>
+<section>  
+<table border="1">
   <thead>
     <tr> <!--linha de cabeçalho-->
        <td>Paciente</td>
@@ -155,10 +157,14 @@
     <tr>
       <td>{{valor.id_paciente}}</td>
       <td>{{valor.doença}}</td>
-      <td>{{valor.id_secretaria}}</td>
+      <td>{{valor.id_enfermeira}}</td>
       <td>{{valor.id_medico}}</td>
       <td>{{valor.id_medicação}}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+<footer>
+    <div class="footer">Todos os direitos reservados &copy; 2024</div>
+</footer>
+</section>

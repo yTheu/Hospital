@@ -1,12 +1,11 @@
 from django.shortcuts import render,redirect
 from app1.models import Médico, Enfermeira, Paciente, Remédio, Consulta
 from app1.forms import UsuarioForm
+from django.contrib import messages
 
 def index(request):
     return render(request,'index.html')
 
-def triagem(request):
-   return render(request,'triagem.html')
 
 def consultas(request):
     return render(request, 'Consultas.html')
@@ -32,11 +31,12 @@ def cadastrar_usuario(request):
         if form.is_valid():
             usuario = form.save(commit=False)
             # Criptografar a senha antes de salvar
-            
-            
             usuario.save()
-            
+            messages.success(request, 'Paciente cadastrado com sucesso!')
             return redirect('cadastrar_usuario')
+        else:
+            messages.error(request, 'Erro ao cadastrar o paciente. Verifique os dados.')
     else:
         form = UsuarioForm()
     return render(request, 'triagem.html', {'form': form})
+

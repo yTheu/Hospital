@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import UniqueConstraint
 
 class Paciente(models.Model):
     class Situacao(models.TextChoices):
@@ -14,6 +15,11 @@ class Paciente(models.Model):
     endereco = models.CharField(max_length=250, blank=False)
     telefone = models.CharField(max_length=10, blank=False)
     telefone_familiar = models.CharField(max_length=10, blank=False)
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['cpf'], name='unique_paciente_cpf')  # Um nome único por paciente.
+        ]
 
     def __str__(self):
         return f"{self.nome} - {self.cpf}"

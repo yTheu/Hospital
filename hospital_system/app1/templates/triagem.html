@@ -129,11 +129,12 @@
     </header>
 
     <section>
-        <h1>Formulário de Triagem</h1>  
+        <h1>Fomulário de Triagem</h1>  
        
             {% if messages %}
             {% for message in messages %}
                 <p style="color: green;">{{ message }}</p>
+                <p style="color: red;">{{ message }}</p>""
             {% endfor %}
         {% endif %}
         <form method="post">
