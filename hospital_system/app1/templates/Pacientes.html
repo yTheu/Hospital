@@ -153,6 +153,7 @@
       <td>Endereço</td>
       <td>Telefone</td>
       <td>Telefone Secundário</td>
+      
       <td>°°°</td>
       
     </tr>
@@ -167,10 +168,11 @@
       <td>{{valor.endereco}}</td>
       <td>{{valor.telefone}}</td>
       <td>{{valor.telefone_familiar}}</td>
+      
       <td>
         <a href="{% url 'detalharPaciente' valor.id %}"><img src="https://cdn-icons-png.flaticon.com/512/64/64673.png" width="20px"></a>
-        <a href=""><img src="https://cdn-icons-png.flaticon.com/512/32/32355.png" width="20px"></a>
-        <a href=""><img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" width="20px">
+        <a href="{% url 'editarpaciente' valor.id %}"><img src="https://cdn-icons-png.flaticon.com/512/32/32355.png" width="20px"></a>
+        <a href="{% url 'deletarpaciente' valor.id %}"><img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" width="20px">
         </a>
     </td>
     </tr> 

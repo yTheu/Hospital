@@ -16,6 +16,7 @@ class Paciente(models.Model):
     telefone = models.CharField(max_length=10, blank=False)
     telefone_familiar = models.CharField(max_length=10, blank=False)
 
+
     class Meta:
         constraints = [
             UniqueConstraint(fields=['cpf'], name='unique_paciente_cpf')  # Um nome único por paciente.
