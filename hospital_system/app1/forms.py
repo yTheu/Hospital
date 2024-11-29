@@ -1,5 +1,5 @@
 from django import forms
-from app1.models import Paciente
+from app1.models import Paciente, Consulta
 
 class UsuarioForm(forms.ModelForm):
   
@@ -13,3 +13,12 @@ def clean_email(self):
  if Paciente.objects.filter(cpf=cpf).exists():
    raise forms.ValidationError('Já existe um paciente com este cpf.')
  return cpf
+
+class outroForm(forms.ModelForm):
+  
+
+ class Meta:
+        model = Consulta
+        fields = ['id_paciente', 'doença','id_enfermeira','id_medico','id_medicação']
+
+        

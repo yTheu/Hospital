@@ -51,3 +51,5 @@ class Consulta(models.Model):
     id_enfermeira = models.ForeignKey(Enfermeira, on_delete = models.PROTECT)
     id_medico = models.ForeignKey(Médico, on_delete = models.PROTECT)
     id_medicação = models.ForeignKey(Remédio, on_delete = models.PROTECT)
+    
+    

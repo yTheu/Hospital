@@ -1,0 +1,136 @@
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triagem - Centro Hospitalar de SR do Bonfim</title>
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Arial', sans-serif;
+          line-height: 1.6;
+          background-color: #f4f4f4;
+      }
+
+      header {
+          background-color: #337ab7;
+          padding: 10px 0;
+      }
+
+      nav ul {
+          display: flex;
+          justify-content: center;
+          list-style: none;
+      }
+
+      nav ul li {
+          margin: 0 20px;
+      }
+
+      nav ul li a {
+          color: #e2e2e2;
+          text-decoration: none;
+          font-size: 18px;
+          transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+          color: #ffffff;
+      }
+
+      section {
+          margin: 20px auto;
+          padding: 20px;
+          max-width: 600px;
+          background-color: #ffffff;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      section h1 {
+          color: #337ab7;
+          text-align: center;
+          margin-bottom: 20px;
+      }
+
+      span{
+          color: red;
+      } 
+
+      label {
+          display: block;
+          font-weight: bold;
+          margin: 10px 0 5px;
+      }
+
+      input, select, textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+      }
+
+      input[type="checkbox"] {
+          width: auto;
+      }
+
+      label a{
+          text-decoration: none;
+          color: #000
+      }
+
+      input[type="submit"] {
+          background-color: #337ab7;
+          color: #fff;
+          font-size: 18px;
+          border: none;
+          cursor: pointer;
+          padding: 10px 20px;
+          border-radius: 5px;
+          transition: background-color 0.3s;
+      }
+
+      input[type="submit"]:hover {
+          background-color: #285e8e;
+      }
+
+      footer {
+          background-color: #337ab7;
+          color: white;
+          text-align: center;
+          padding: 20px 0;
+          margin-top: 90px;
+      }
+
+      footer .footer {
+          font-size: 14px;
+      }
+  </style>
+
+ </head>
+ <header>
+  <nav>
+      <ul>
+          <li><a href=""></a></li>
+      </ul>
+  </nav>
+</header>
+  <body>
+    <b>Nome:</b> <td><em>{{paciente.nome}} </em> </td><br />
+    <b>CPF:</b> <td>{{paciente.cpf}}</td><br />
+    <b>Situação:</b> <td>{{paciente.situacao}}</td><br />
+    <b>sintomas:</b> <td>{{paciente.sintoma}}</td><br />
+    <b> Data de nascimento:</b><td>{{paciente.data_nascimento}}</td><br />
+    <b>Endereço:</b><td>{{paciente.endereco}}</td><br />
+    <b>telefone:</b></h5><td>{{paciente.telefone}}</td><br />
+    <b>telefone_familiar:</b>  <td>{{paciente.telefone_familiar}}</td><br />
+  
+  </body>
+ 
+</html>
