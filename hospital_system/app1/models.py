@@ -34,17 +34,26 @@ class Médico(models.Model):
     endereco = models.CharField(max_length=250, blank=False)
     telefone = models.CharField(max_length=10, blank = False)
 
+    def __str__(self):
+        return self.nome
+
 class Enfermeira(models.Model):
     nome = models.CharField(max_length=100, blank=False)
     cpf = models.CharField(max_length=11, blank=False)
     disponibilidade = models.BooleanField()
     endereco = models.CharField(max_length=250, blank=False)
     telefone = models.CharField(max_length=10, blank = False)
+    
+    def __str__(self):
+        return self.nome
 
 class Remédio(models.Model):
     nome = models.CharField(max_length=100, blank=False)
     laboratorio = models.CharField(max_length=150, blank=False)
     bula = models.CharField(max_length=300, blank=False)
+
+    def __str__(self):
+        return self.nome
 
 class Consulta(models.Model):
     id_paciente = models.ForeignKey(Paciente, on_delete = models.PROTECT)
@@ -53,4 +62,6 @@ class Consulta(models.Model):
     id_medico = models.ForeignKey(Médico, on_delete = models.PROTECT)
     id_medicação = models.ForeignKey(Remédio, on_delete = models.PROTECT)
     
+    def __str__(self):
+        return f"self.id_paciente", self.id_enfermeira, self.id_medico, self.id_medicação
     

@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate, login
 from app1.models import Médico, Enfermeira, Paciente, Remédio, Consulta
 from app1.forms import UsuarioForm, outroForm
 from django.contrib import messages
@@ -7,6 +8,20 @@ from django.db.models.deletion import ProtectedError
 def index(request):
     return render(request,'index.html')
 
+def custom_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Bem-vindo à área da equipe!')
+            return redirect('index.html')
+        else:
+            messages.error(request, 'Credenciais inválidas.')
+    
+    return render(request, 'login.html')
 
 def consultas(request):
     return render(request, 'Consultas.html')
@@ -34,7 +49,6 @@ def cadastrar_usuario(request):
         form = UsuarioForm(request.POST)
         if form.is_valid():
             usuario = form.save(commit=False)
-            # Criptografar a senha antes de salvar
             usuario.save()
             messages.success(request, 'Paciente cadastrado com sucesso!')
             return redirect('cadastrar_usuario')
@@ -50,15 +64,14 @@ def marcarConsulta(request):
         form = outroForm(request.POST)
         if form.is_valid():
             consulta = form.save(commit=False)
-            # Criptografar a senha antes de salvar
             consulta.save()
-            messages.success(request, 'consulta marcada com sucesso')
+            messages.success(request, 'Consulta marcada com sucesso')
             return redirect('cadastrar_usuario')
         else:
             messages.error(request, 'Erro ao marcar consulta')
     else:
         form = outroForm()
-    return render(request, 'marcação.html', {'form': form})
+    return render(request, 'Marcação.html', {'form': form})
 
 def deletarpaciente(request, id):
     try:
