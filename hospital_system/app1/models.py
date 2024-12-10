@@ -3,14 +3,14 @@ from django.db.models import UniqueConstraint
 
 class Paciente(models.Model):
     class Situacao(models.TextChoices):
-        LEVE = 'leve', 'leve'
-        ESTAVEL = 'estavel', 'estavel'
-        GRAVE = 'grave', 'grave'
+        ESTAVEL = 'Estável', 'Estável'
+        PRIORITARIO = 'Prioritário', 'Prioritário'
+        EMERGENCIA = 'Emergência', 'Emergência'
 
     nome = models.CharField(max_length=100, blank=False)
     sintoma = models.CharField(max_length=300, blank=False)
-    situacao = models.CharField(max_length=10, choices=Situacao.choices, default=Situacao.LEVE, blank=False)
-    cpf = models.CharField(max_length=11, blank=False)
+    situacao = models.CharField(max_length=12, choices=Situacao.choices, default=Situacao.ESTAVEL, blank=False)
+    cpf = models.CharField(max_length=14, blank=False)
     data_nascimento = models.DateField(blank=False)
     endereco = models.CharField(max_length=250, blank=False)
     telefone = models.CharField(max_length=10, blank=False)
@@ -63,5 +63,5 @@ class Consulta(models.Model):
     id_medicação = models.ForeignKey(Remédio, on_delete = models.PROTECT)
     
     def __str__(self):
-        return f"self.id_paciente", self.id_enfermeira, self.id_medico, self.id_medicação
+        return self.id_paciente, self.id_enfermeira, self.id_medico, self.id_medicação
     
