@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <b>Nome:</b> <em>{{ medico.nome }}</em><br />
+    <b>CPF:</b> {{ medico.cpf }}<br />
+    <b>Especialização:</b> {{ medico.get_especializacao_display }}<br />
+    <b>Situação:</b> {% if medico.contratada %}Contratado{% else %}Não Contratado{% endif %}<br />
+    <b>Disponibilidade:</b> {% if medico.disponibilidade %}Disponível{% else %}Indisponível{% endif %}<br />
+    <b>Data de Nascimento:</b> {{ medico.data_nascimento }}<br />
+    <b>Endereço:</b> {{ medico.endereco }}<br />
+    <b>Telefone:</b> {{ medico.telefone }}<br />
+    <b>Email:</b> {% if medico.email %}{{ medico.email }}{% else %}Não informado{% endif %}<br />
+    <b>Gênero:</b> {{ medico.get_genero_display }}<br />
+    <b>Salário:</b> {% if medico.salario %}R$ {{ medico.salario|floatformat:2 }}{% else %}Não informado{% endif %}<br />
+    <b>Turno:</b> {{ medico.get_turno_display }}<br />
+    <b>Data de Contratação:</b> {{ medico.data_contratacao }}<br />
+{% endblock %}

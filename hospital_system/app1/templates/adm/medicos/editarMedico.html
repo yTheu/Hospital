@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Editar Médico</h1>
+
+  <form method="POST" action="{% url 'editarMedico' medico.id %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" name="nome" class="form-control" id="nome" value="{{ medico.nome }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="cpf" class="form-label">CPF</label>
+      <input type="text" name="cpf" class="form-control" id="cpf" value="{{ medico.cpf }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="especializacao" class="form-label">Especialização</label>
+        <select name="especializacao" class="form-control" id="especializacao">
+          <option value="" {% if not medico.especializacao %}selected{% endif %}>Selecione...</option>
+          <option value="CG" {% if medico.especializacao == 'F' %}selected{% endif %}>Clínica Geral</option>
+          <option value="P" {% if medico.especializacao == 'M' %}selected{% endif %}>Pediatria</option>
+          <option value="G" {% if medico.especializacao == 'O' %}selected{% endif %}>Ginecologia</option>
+          <option value="C" {% if medico.especializacao == 'O' %}selected{% endif %}>Cardiologista</option>
+          <option value="O" {% if medico.especializacao == 'O' %}selected{% endif %}>Ortopedista</option>
+        </select>
+      </div>
+
+    <div class="mb-3">
+      <label for="endereco" class="form-label">Endereço</label>
+      <input type="text" name="endereco" class="form-control" id="endereco" value="{{ medico.endereco }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="telefone" class="form-label">Telefone</label>
+      <input type="text" name="telefone" class="form-control" id="telefone" value="{{ medico.telefone }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+      <input type="date" name="data_nascimento" class="form-control" id="data_nascimento" value="{{ medico.data_nascimento|date:'Y-m-d' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="data_contratacao" class="form-label">Data de Contratação</label>
+      <input type="datetime-local" name="data_contratacao" class="form-control" id="data_contratacao" value="{{ medico.data_contratacao|date:'Y-m-d H:i' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" class="form-control" id="email" value="{{ medico.email }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="genero" class="form-label">Gênero</label>
+      <select name="genero" class="form-control" id="genero">
+        <option value="" {% if not medico.genero %}selected{% endif %}>Selecione...</option>
+        <option value="F" {% if medico.genero == 'F' %}selected{% endif %}>Feminino</option>
+        <option value="M" {% if medico.genero == 'M' %}selected{% endif %}>Masculino</option>
+        <option value="O" {% if medico.genero == 'O' %}selected{% endif %}>Outro</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="salario" class="form-label">Salário</label>
+      <input type="number" step="0.01" name="salario" class="form-control" id="salario" value="{{ medico.salario }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="turno" class="form-label">Turno</label>
+      <select name="turno" class="form-control" id="turno">
+        <option value="" {% if not medico.turno %}selected{% endif %}>Selecione...</option>
+        <option value="M" {% if medico.turno == 'M' %}selected{% endif %}>Manhã</option>
+        <option value="T" {% if medico.turno == 'T' %}selected{% endif %}>Tarde</option>
+        <option value="N" {% if medico.turno == 'N' %}selected{% endif %}>Noite</option>
+        <option value="F" {% if medico.turno == 'F' %}selected{% endif %}>Flexível</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="disponibilidade" class="form-label">Disponibilidade</label>
+      <input type="checkbox" name="disponibilidade" class="form-check-input" id="disponibilidade" {% if medico.disponibilidade %}checked{% endif %}>
+    </div>
+
+    <div class="mb-3">
+      <label for="contratada" class="form-label">Contratado</label>
+      <input type="checkbox" name="contratada" class="form-check-input" id="contratada" {% if medico.contratada %}checked{% endif %}>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+  </form>
+
+  <a href="{% url 'detalharMedico' medico.id %}" class="btn btn-secondary mt-3">Voltar</a>
+{% endblock %}

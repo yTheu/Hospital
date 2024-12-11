@@ -5,29 +5,32 @@
 {% block content %}
 <div class="container">
   <h1 class="text-center mb-4">Remédios</h1>
-  <a href="" class="btn btn-primary mb-3">Cadastrar Remédio</a>
+  <a href="cadastrarRemedio" class="btn btn-primary mb-3">Cadastrar Remédio</a>
 
   <table class="table table-bordered table-striped">
     <thead class="bg-primary text-white">
       <tr>
         <th>Nome do Remédio</th>
         <th>Laboratório</th>
+        <th>Tipo</th>
         <th>Bula</th>
+        <th>Quantidade no estoque</th>
+        <th>Data de Validade</th>
         <th>Ações</th>
       </tr>
     </thead>
     <tbody class="bg-white">
-      {% for valor in remedio %}
+      {% for medicamento in medicamentos %}
         <tr>
-          <td>{{ valor.nome }}</td>
-          <td>{{ valor.laboratorio }}</td>
-          <td>{{ valor.bula }}</td>
+          <td>{{ medicamento.nome }}</td>
+          <td>{{ medicamento.laboratorio }}</td>
+          <td>{{ medicamento.tipo }}</td>
+          <td>{{ medicamento.bula }}</td>
+          <td>{{ medicamento.quantidade_estoque }} unidades</td>
+          <td>{{ medicamento.data_validade }}</td>
           <td>
-              <a href="{% url 'editarpaciente' valor.id %}" class="btn btn-warning btn-sm">
+              <a href="{% url 'editarRemedio' medicamento.id %}" class="btn btn-warning btn-sm">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
-              </a>
-              <a href="{% url 'editarpaciente' valor.id %}" class="btn btn-danger btn-sm">
-                <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
           </td>
         </tr>

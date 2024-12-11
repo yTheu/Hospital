@@ -1,9 +1,8 @@
-<DOCTYPE! HTML>
+<!DOCTYPE html>
 <html>
-    
   <head>
     <title>Centro Hospitalar de SR do Bonfim</title>
-    <meta charset="UTF=8"/>
+    <meta charset="UTF-8"/>
     <style>
       * {
           margin: 0;
@@ -122,32 +121,43 @@
     <form method="POST">
         {% csrf_token %}
       <label>Nome</label>
-      <input type="text" name="nome" value="{{pacientes.nome}}"/>
+      <input type="text" name="nome" value="{{paciente.nome}}"/>
 
-     <label for = "situação">situacao:</label><br />
-     <input name ="situacao" id ="situacao"  value="{{pacientes.situacao}}
-     " type="text"><br />
+     <label for="situacao">Situação:</label><br />
+     <select name="situacao" id="situacao">
+        <option value="Estável" {% if paciente.situacao == 'Estável' %}selected{% endif %}>Estável</option>
+        <option value="Moderado" {% if paciente.situacao == 'Moderado' %}selected{% endif %}>Moderado</option>
+        <option value="Grave" {% if paciente.situacao == 'Grave' %}selected{% endif %}>Grave</option>
+        <option value="Crítico" {% if paciente.situacao == 'Crítico' %}selected{% endif %}>Crítico</option>
+     </select><br />
 
-     <label for="CPF" >CPF:</label><br />
-     <input name="cpf" id="CPF" type="number"value="{{pacientes.cpf}}" ><br />
+     <label for="estado_consulta">Estado da Consulta:</label><br />
+     <select name="estado_consulta" id="estado_consulta">
+        <option value="Triagem" {% if paciente.estado_consulta == 'Triagem' %}selected{% endif %}>Triagem</option>
+        <option value="Em Consulta" {% if paciente.estado_consulta == 'Em Consulta' %}selected{% endif %}>Em Consulta</option>
+        <option value="Alta" {% if paciente.estado_consulta == 'Alta' %}selected{% endif %}>Alta</option>
+     </select><br />
 
-     <label for="telefone">telefone</label> <br />
-     <input name="telefone" id ="telefone" type="tel"  pattern="[0-9]{11}" value="{{pacientes.telefone}}" > <br />
+     <label for="cpf">CPF:</label><br />
+     <input name="cpf" id="cpf" type="number" value="{{paciente.cpf}}"><br />
 
-     <label for="telefone_familiar">telefone_familiar</label> <br />
-     <input name="telefone_familiar" id ="telefone_familiar" type="telefone_familiar" value="{{pacientes.telefone_familiar}}" pattern ="[0-9]{11}"> <br />
+     <label for="telefone">Telefone:</label><br />
+     <input name="telefone" id="telefone" type="tel" pattern="[0-9]{11}" value="{{paciente.telefone}}"><br />
 
-     <label for="endereco">endereço</label><br />
-     <input name="endereco" id="endereco" type="text" maxlength="100" value="{{pacientes.endereco}}" ><br />
-     
-     <label for ="Data de nascimento">Data de Nascimento</label><br />
-     <input name="data_nascimento"id ="Data de nascimento" value="{{pacientes.data_nascimento|date:'Y-m-d'}}"type="date"><br />
+     <label for="telefone_familiar">Telefone Familiar:</label><br />
+     <input name="telefone_familiar" id="telefone_familiar" type="tel" pattern="[0-9]{11}" value="{{paciente.telefone_familiar}}"><br />
 
-     <label for="sintoma" >Sintomas</label><br />
-     <input name="sintoma"id="sintoma" value="{{pacientes.sintoma}}"rows="5" cols="15"></input><br />
+     <label for="endereco">Endereço:</label><br />
+     <input name="endereco" id="endereco" type="text" maxlength="100" value="{{paciente.endereco}}"><br />
 
-     <input type="submit" value="atualizar">
+     <label for="data_nascimento">Data de Nascimento:</label><br />
+     <input name="data_nascimento" id="data_nascimento" type="date" value="{{paciente.data_nascimento|date:'Y-m-d'}}"><br />
+
+     <label for="sintoma">Sintomas:</label><br />
+     <textarea name="sintoma" id="sintoma" rows="5" cols="15">{{paciente.sintoma}}</textarea><br />
+
+     <input type="submit" value="Atualizar">
     </form>
-</section>
+  </section>
   </body>
 </html>

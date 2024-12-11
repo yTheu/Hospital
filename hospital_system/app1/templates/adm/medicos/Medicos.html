@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
   <h1 class="text-center mb-4">Médicos</h1>
-  <a href="" class="btn btn-primary mb-3">Cadastrar Médico</a>
+  <a href="cadastrarMedico" class="btn btn-primary mb-3">Cadastrar Médico</a>
 
   <table class="table table-bordered table-striped">
     <thead class="bg-primary text-white">
@@ -21,20 +21,20 @@
       </tr>
     </thead>
     <tbody class="bg-white">
-      {% for valor in medico %}
+      {% for medico in medicos %}
         <tr>
-          <td>{{ valor.nome }}</td>
-          <td>{{ valor.cpf }}</td>
-          <td>{{ valor.especializacao }}</td>
-          <td>{{ valor.disponibilidade }}</td>
-          <td>{{ valor.data_nascimento }}</td>
-          <td>{{ valor.endereco }}</td>
-          <td>{{ valor.telefone }}</td>
+          <td>{{ medico.nome }}</td>
+          <td>{{ medico.cpf }}</td>
+          <td>{{ medico.especializacao }}</td>
+          <td>{{ medico.disponibilidade }}</td>
+          <td>{{ medico.data_nascimento }}</td>
+          <td>{{ medico.endereco }}</td>
+          <td>{{ medico.telefone }}</td>
           <td>
-            <a href="{% url 'detalharPaciente' valor.id %}" class="btn btn-info btn-sm">
+            <a href="{% url 'detalharMedico' medico.id %}" class="btn btn-info btn-sm">
               <i class="fa fa-info" aria-hidden="true"></i>
             </a>
-            <a href="{% url 'detalharPaciente' valor.id %}" class="btn btn-warning btn-sm">
+            <a href="{% url 'editarMedico' medico.id %}" class="btn btn-warning btn-sm">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
           </td>

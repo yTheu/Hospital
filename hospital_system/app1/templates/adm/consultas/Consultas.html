@@ -12,18 +12,18 @@
       <tr>
         <th>ID do Paciente</th>
         <th>Doença</th>
-        <th>Secretária</th>
+        <th>Enfermeiro(a)</th>
         <th>Médico</th>
         <th>Remédio</th>
         <th>Ações</th>
       </tr>
     </thead>
     <tbody class="bg-white">
-      {% for valor in consulta %}
+      {% for valor in consultas %}
         <tr>
           <td>{{ valor.id_paciente }}</td>
           <td>{{ valor.doença }}</td>
-          <td>{{ valor.id_enfermeira }}</td>
+          <td>{{ valor.id_enfermeiro }}</td>
           <td>{{ valor.id_medico }}</td>
           <td>{{ valor.id_medicação }}</td>
           <td>

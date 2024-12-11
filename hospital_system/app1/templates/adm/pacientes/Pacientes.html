@@ -21,20 +21,20 @@
       </tr>
     </thead>
     <tbody class="bg-white">
-      {% for valor in paciente %}
+      {% for paciente in pacientes %}
         <tr>
-          <td>{{ valor.nome }}</td>
-          <td>{{ valor.cpf }}</td>
-          <td>{{ valor.situacao }}</td>
-          <td>{{ valor.sintoma }}</td>
-          <td>{{ valor.endereco }}</td>
-          <td>{{ valor.telefone }}</td>
-          <td>{{ valor.telefone_familiar }}</td>
+          <td>{{ paciente.nome }}</td>
+          <td>{{ paciente.cpf }}</td>
+          <td>{{ paciente.situacao }}</td>
+          <td>{{ paciente.sintoma }}</td>
+          <td>{{ paciente.endereco }}</td>
+          <td>{{ paciente.telefone }}</td>
+          <td>{{ paciente.telefone_familiar }}</td>
           <td>
-            <a href="{% url 'detalharPaciente' valor.id %}" class="btn btn-info btn-sm">
+            <a href="{% url 'detalharPaciente' paciente.id %}" class="btn btn-info btn-sm">
               <i class="fa fa-info" aria-hidden="true"></i>
             </a>
-            <a href="{% url 'editarpaciente' valor.id %}" class="btn btn-warning btn-sm">
+            <a href="{% url 'editarpaciente' paciente.id %}" class="btn btn-warning btn-sm">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
           </td>

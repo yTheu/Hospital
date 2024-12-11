@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Editar Enfermeiro</h1>
+
+  <form method="POST" action="{% url 'editarEnfermeiro' enfermeiro.id %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" name="nome" class="form-control" id="nome" value="{{ enfermeiro.nome }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="cpf" class="form-label">CPF</label>
+      <input type="text" name="cpf" class="form-control" id="cpf" value="{{ enfermeiro.cpf }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="endereco" class="form-label">Endereço</label>
+      <input type="text" name="endereco" class="form-control" id="endereco" value="{{ enfermeiro.endereco }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="telefone" class="form-label">Telefone</label>
+      <input type="text" name="telefone" class="form-control" id="telefone" value="{{ enfermeiro.telefone }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+      <input type="date" name="data_nascimento" class="form-control" id="data_nascimento" value="{{ enfermeiro.data_nascimento|date:'Y-m-d' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="data_contratacao" class="form-label">Data de Contratação</label>
+      <input type="datetime-local" name="data_contratacao" class="form-control" id="data_contratacao" value="{{ enfermeiro.data_contratacao|date:'Y-m-d H:i' }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" class="form-control" id="email" value="{{ enfermeiro.email }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="genero" class="form-label">Gênero</label>
+      <select name="genero" class="form-control" id="genero">
+        <option value="" {% if not enfermeiro.genero %}selected{% endif %}>Selecione...</option>
+        <option value="F" {% if enfermeiro.genero == 'F' %}selected{% endif %}>Feminino</option>
+        <option value="M" {% if enfermeiro.genero == 'M' %}selected{% endif %}>Masculino</option>
+        <option value="O" {% if enfermeiro.genero == 'O' %}selected{% endif %}>Outro</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="salario" class="form-label">Salário</label>
+      <input type="number" step="0.01" name="salario" class="form-control" id="salario" value="{{ enfermeiro.salario }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="turno" class="form-label">Turno</label>
+      <select name="turno" class="form-control" id="turno">
+        <option value="" {% if not enfermeiro.turno %}selected{% endif %}>Selecione...</option>
+        <option value="M" {% if enfermeiro.turno == 'M' %}selected{% endif %}>Manhã</option>
+        <option value="T" {% if enfermeiro.turno == 'T' %}selected{% endif %}>Tarde</option>
+        <option value="N" {% if enfermeiro.turno == 'N' %}selected{% endif %}>Noite</option>
+        <option value="F" {% if enfermeiro.turno == 'F' %}selected{% endif %}>Flexível</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="disponibilidade" class="form-label">Disponibilidade</label>
+      <input type="checkbox" name="disponibilidade" class="form-check-input" id="disponibilidade" {% if enfermeiro.disponibilidade %}checked{% endif %}>
+    </div>
+
+    <div class="mb-3">
+      <label for="contratada" class="form-label">Contratada</label>
+      <input type="checkbox" name="contratada" class="form-check-input" id="contratada" {% if enfermeiro.contratada %}checked{% endif %}>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+  </form>
+
+  <a href="{% url 'detalharEnfermeiro' enfermeiro.id %}" class="btn btn-secondary mt-3">Voltar</a>
+{% endblock %}

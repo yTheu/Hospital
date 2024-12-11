@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <b>Nome:</b> <em>{{ paciente.nome }}</em><br />
+    <b>Sintomas:</b> {{ paciente.sintoma }}<br />
+    <b>Situação:</b> {{ paciente.get_situacao_display }}<br />
+    <b>Estado da Consulta:</b> {{ paciente.get_estado_consulta_display }}<br />
+    <b>CPF:</b> {{ paciente.cpf }}<br />
+    <b>Data de Nascimento:</b> {{ paciente.data_nascimento }}<br />
+    <b>Endereço:</b> {{ paciente.endereco }}<br />
+    <b>Telefone:</b> {{ paciente.telefone }}<br />
+    <b>Telefone Familiar:</b> {{ paciente.telefone_familiar }}<br />
+{% endblock %}

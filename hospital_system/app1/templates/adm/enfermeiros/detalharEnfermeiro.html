@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <b>Nome:</b> <em>{{ enfermeiro.nome }}</em><br />
+    <b>CPF:</b> {{ enfermeiro.cpf }}<br />
+    <b>Situação:</b> {% if enfermeiro.contratada %}Contratado{% else %}Não Contratado{% endif %}<br />
+    <b>Disponibilidade:</b> {% if enfermeiro.disponibilidade %}Disponível{% else %}Indisponível{% endif %}<br />
+    <b>Data de Nascimento:</b> {{ enfermeiro.data_nascimento }}<br />
+    <b>Endereço:</b> {{ enfermeiro.endereco }}<br />
+    <b>Telefone:</b> {{ enfermeiro.telefone }}<br />
+    <b>Email:</b> {% if enfermeiro.email %}{{ enfermeiro.email }}{% else %}Não informado{% endif %}<br />
+    <b>Gênero:</b> {{ enfermeiro.get_genero_display }}<br />
+    <b>Salário:</b> {% if enfermeiro.salario %}R$ {{ enfermeiro.salario|floatformat:2 }}{% else %}Não informado{% endif %}<br />
+    <b>Turno:</b> {{ enfermeiro.get_turno_display }}<br />
+    <b>Data de Contratação:</b> {{ enfermeiro.data_contratacao }}<br />
+{% endblock %}

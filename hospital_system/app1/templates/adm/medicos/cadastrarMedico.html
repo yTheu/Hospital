@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Médico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section h3 {
+            color: #337ab7;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        span {
+            color: red;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+        }
+
+        label a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        button {
+            background-color: #337ab7;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #285e8e;
+        }
+
+        footer {
+            background-color: #337ab7;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 90px;
+        }
+
+        footer .footer {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h3>Cadastro de Médico</h3>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: green;">{{ message }}</p>
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="nome">Nome</label>
+                {{ form.nome }}
+                {% if form.nome.errors %}
+                    <div style="color: red;">{{ form.nome.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="cpf">CPF</label>
+                {{ form.cpf }}
+                {% if form.cpf.errors %}
+                    <div style="color: red;">{{ form.cpf.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="especializacao">Especialização</label>
+                {{form.especializacao}}
+                {%if form.especializacao.errors%}
+                    <div style="color: red;">{{form.especializacao.errors}}</div>
+                {%endif%}
+            </div>
+
+            <div>
+                <label for="endereco">Endereço</label>
+                {{ form.endereco }}
+                {% if form.endereco.errors %}
+                    <div style="color: red;">{{ form.endereco.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="telefone">Telefone</label>
+                {{ form.telefone }}
+                {% if form.telefone.errors %}
+                    <div style="color: red;">{{ form.telefone.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="data_nascimento">Data de Nascimento</label>
+                {{ form.data_nascimento }}
+                {% if form.data_nascimento.errors %}
+                    <div style="color: red;">{{ form.data_nascimento.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="data_contratacao">Data de Contratação</label>
+                {{ form.data_contratacao }}
+                {% if form.data_contratacao.errors %}
+                    <div style="color: red;">{{ form.data_contratacao.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="email">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div style="color: red;">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="genero">Gênero</label>
+                {{ form.genero }}
+                {% if form.genero.errors %}
+                    <div style="color: red;">{{ form.genero.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="salario">Salário</label>
+                {{ form.salario }}
+                {% if form.salario.errors %}
+                    <div style="color: red;">{{ form.salario.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label for="turno">Turno</label>
+                {{ form.turno }}
+                {% if form.turno.errors %}
+                    <div style="color: red;">{{ form.turno.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+    </section>
+</body>
+{% endblock %}

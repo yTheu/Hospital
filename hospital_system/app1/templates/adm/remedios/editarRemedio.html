@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Editar Remédio</h1>
+
+  <form method="POST" action="{% url 'editarRemedio' medicamento.id %}">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="id_nome" class="form-label">Nome</label>
+      <input type="text" name="nome" class="form-control" id="id_nome" value="{{ medicamento.nome }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="id_laboratorio" class="form-label">Laboratório</label>
+      <input type="text" name="laboratorio" class="form-control" id="id_laboratorio" value="{{ medicamento.laboratorio }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="id_bula" class="form-label">Bula</label>
+      <textarea name="bula" class="form-control" id="id_bula">{{ medicamento.bula }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_tipo" class="form-label">Tipo</label>
+      <select name="tipo" class="form-control" id="id_tipo">
+        <option value="" {% if not medicamento.tipo %}selected{% endif %}>Selecione...</option>
+        <option value="Analgésico" {% if medicamento.tipo == 'Analgésico' %}selected{% endif %}>Analgésico</option>
+        <option value="Antibiótico" {% if medicamento.tipo == 'Antibiótico' %}selected{% endif %}>Antibiótico</option>
+        <option value="Corticóide" {% if medicamento.tipo == 'Corticóide' %}selected{% endif %}>Corticóide</option>
+        <option value="Descongestionante" {% if medicamento.tipo == 'Descongestionante' %}selected{% endif %}>Descongestionante</option>
+    </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_quantidade_estoque" class="form-label">Quantidade em Estoque</label>
+      <input type="number" name="quantidade_estoque" class="form-control" id="id_quantidade_estoque" value="{{ medicamento.quantidade_estoque }}">
+    </div>
+
+    <div class="mb-3">
+      <label for="id_data_validade" class="form-label">Data de Validade</label>
+      <input type="date" name="data_validade" class="form-control" id="id_data_validade" value="{{ medicamento.data_validade|date:'Y-m-d' }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+  </form>
+
+  <a href="{% url 'remedios' %}" class="btn btn-secondary mt-3">Voltar</a>
+{% endblock %}
