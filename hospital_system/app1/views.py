@@ -6,7 +6,19 @@ from django.contrib import messages
 from django.db.models.deletion import ProtectedError
 
 def index(request):
-    return render(request,'adm/index.html')
+    return render(request,'index.html')
+def home(request):
+    return render(request,'adm/home.html')
+def login_medico(request):
+    return render(request,'login_medico.html')
+def login_paciente(request):
+    return render(request,'login_paciente.html')
+def agenda_medica(request):
+    return render(request,'Agenda_medica.html')
+def pesquisar_consulta(request):
+    return render(request,'Pesquisar_consultas.html')
+
+
 
 def custom_login(request):
     if request.method == 'POST':

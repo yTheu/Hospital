@@ -84,7 +84,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Área da Equipe</h1>
+        <h1>Agenda Medíca</h1>
 
         {% if messages %}
             {% for message in messages %}
@@ -95,9 +95,9 @@
         {% endif %}
 
         <!-- Formulário -->
-        <form method="post" action="{% url 'Home' %}">
+        <form method="post" action="{% url 'agenda_medica' %}">
             {% csrf_token %}
-            <label for="username">Nome de Usuário:</label>
+            <label for="username">Nome do Medíco:</label>
             <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
             
             <label for="password">Senha:</label>

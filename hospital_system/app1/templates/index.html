@@ -17,15 +17,18 @@
             background-color: #f4f4f4;
         }
 
-        header {
+        header  {
             background-color: #337ab7;
             padding: 10px 0;
+           
+            
         }
-
-        nav ul {
+       
+        nav ul li{
             display: flex;
             justify-content: center;
             list-style: none;
+            margin-left: 8;
         }
 
         nav ul li {
@@ -41,6 +44,7 @@
 
         nav ul li a:hover {
             color: #ffffff;
+            margin: 10px 0;
         }
 
         section {
@@ -62,7 +66,12 @@
             font-size: 24px;
             margin-bottom: 20px;
         }
+        selection nav ul li{
+          margin-right: 60px;
+          margin: 10px 0;
 
+
+        }
         .triagem{
             border: 2px solid #337ab7;
             border-radius: 10px ;
@@ -106,24 +115,27 @@
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="">Início</a></li>
-                <li><a href="consultas">Consultas</a></li>
-                <li><a href="enfermeiros">Enfermeiros</a></li>
-                <li><a href="pacientes">Pacientes</a></li>
-                <li><a href="medicos">Médicos</a></li>
-                <li><a href="remedios">Remédios</a></li>
-            </ul>
-        </nav>
+      
     </header>
+        
+
     <section>
         <article>
+
             <h1>Centro Hospitalar de Senhor do Bonfim</h1>
+             <p>Sua saúde é a nossa alegria!</p>
+            
         </article>
-        <p>Sua saúde é a nossa alegria!</p>
-        <div class="triagem"><a href="marcarconsulta">Marque uma consulta</a></div>
-        <div class="triagem"><a href="triagem">Faça sua triagem</a></div>
+       
+        <p>como podemos ajudar?</p>
+
+        <nav>
+         <ul>
+            <li><div class="triagem"><a href="login_medico">Agenda medica</a></div></li>
+            <li><div class="triagem"><a href="staff/"> Enfermaria</a></div></li>
+            <li><div class="triagem"><a href="login_paciente">Consultas</a></div></li>
+         </ul>
+        </nav>
     </section>
 
     <footer>
