@@ -129,7 +129,7 @@ class Consulta(models.Model):
     id_enfermeiro = models.ForeignKey(Enfermeiro, on_delete=models.PROTECT)
     id_medico = models.ForeignKey(Médico, on_delete=models.PROTECT)
     id_medicação = models.ForeignKey(Remédio, on_delete=models.PROTECT, blank=True, null=True)
-    doença = models.CharField(max_length=100, blank=False)
+    sintoma = models.CharField(max_length=100, blank=False)
     data_consulta = models.DateTimeField()
     
     def __str__(self):

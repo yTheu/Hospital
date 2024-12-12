@@ -10,8 +10,9 @@
   <table class="table table-bordered table-striped">
     <thead class="bg-primary text-white">
       <tr>
-        <th>ID do Paciente</th>
-        <th>Doença</th>
+        <th>Paciente</th>
+        <th>CPF</th>
+        <th>Sintoma</th>
         <th>Enfermeiro(a)</th>
         <th>Médico</th>
         <th>Remédio</th>
@@ -19,18 +20,19 @@
       </tr>
     </thead>
     <tbody class="bg-white">
-      {% for valor in consultas %}
+      {% for consulta in consultas %}
         <tr>
-          <td>{{ valor.id_paciente }}</td>
-          <td>{{ valor.doença }}</td>
-          <td>{{ valor.id_enfermeiro }}</td>
-          <td>{{ valor.id_medico }}</td>
-          <td>{{ valor.id_medicação }}</td>
+          <td>{{ consulta.id_paciente.nome }}</td>
+          <td>{{ consulta.id_paciente.cpf }}</td>
+          <td>{{ consulta.id_paciente.sintoma }}</td>
+          <td>{{ consulta.id_enfermeiro.nome }}</td>
+          <td>{{ consulta.id_medico.nome }}</td>
+          <td>{{ consulta.id_medicação.nome }}</td>
           <td>
-            <a href="{% url 'editarConsulta' valor.id %}" class="btn btn-warning btn-sm">
+            <a href="{% url 'editarConsulta' consulta.id %}" class="btn btn-warning btn-sm">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
-            <a href="{% url 'apagarConsulta' valor.id %}" class="btn btn-danger btn-sm">
+            <a href="{% url 'apagarConsulta' consulta.id %}" class="btn btn-danger btn-sm">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </a>
           </td>

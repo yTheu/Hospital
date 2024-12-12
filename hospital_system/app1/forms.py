@@ -61,7 +61,7 @@ class RemedioForm(forms.ModelForm):
 class ConsultaForm(forms.ModelForm):
     class Meta:
         model = Consulta
-        fields = ['id_paciente', 'doença', 'id_enfermeiro', 'id_medico', 'id_medicação', 'data_consulta']
+        fields = ['id_paciente', 'sintoma', 'id_enfermeiro', 'id_medico', 'id_medicação', 'data_consulta']
 
     data_consulta = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'})

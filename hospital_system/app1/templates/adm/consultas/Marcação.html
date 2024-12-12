@@ -1,3 +1,6 @@
+{% extends 'base.html'%}
+{% block content %}
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,32 +21,6 @@
             background-color: #f4f4f4;
         }
 
-        header {
-            background-color: #337ab7;
-            padding: 10px 0;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin: 0 20px;
-        }
-
-        nav ul li a {
-            color: #e2e2e2;
-            text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #ffffff;
-        }
-
         section {
             margin: 20px auto;
             padding: 20px;
@@ -53,7 +30,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        section h1 {
+        section h3 {
             color: #337ab7;
             text-align: center;
             margin-bottom: 20px;
@@ -87,7 +64,7 @@
             color: #000
         }
 
-        input[type="submit"] {
+        button {
             background-color: #337ab7;
             color: #fff;
             font-size: 18px;
@@ -98,39 +75,14 @@
             transition: background-color 0.3s;
         }
 
-        input[type="submit"]:hover {
+        button:hover {
             background-color: #285e8e;
-        }
-
-        footer {
-            background-color: #337ab7;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 90px;
-        }
-
-        footer .footer {
-            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="">Início</a></li>
-                <li><a href="consultas">Consultas</a></li>
-                <li><a href="enfermeiros">enfermeiro</a></li>
-                <li><a href="pacientes">Pacientes</a></li>
-                <li><a href="medicos">Médicos</a></li>
-                <li><a href="remedios">Remédios</a></li>
-            </ul>
-        </nav>
-    </header>
-
     <section>
-        <h1>Central de Marcaçâo</h1>  
+        <h3>Central de Marcação</h3>  
        
             {% if messages %}
             {% for message in messages %}
@@ -147,8 +99,5 @@
         
     </section>
 
-    <footer>
-        <div class="footer">Todos os direitos reservados &copy; 2024</div>
-    </footer>
 </body>
-</html>
+{%endblock%}
