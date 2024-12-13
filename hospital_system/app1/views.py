@@ -7,18 +7,32 @@ from django.contrib import messages
 from django.db.models.deletion import ProtectedError
 from datetime import datetime
 
+def check_login_medico(func):
+    def wrapper(request, *args, **kwargs):
+        medico_id = request.session.get('medico_id')
+        if not medico_id or not Médico.objects.filter(id=medico_id).exists():
+            return redirect('/login_medico')
+        return func(request, *args, **kwargs)
+    return wrapper
+
+def check_login_adm(func):
+    def wrapper(request, *args, **kwargs):
+        
+        if not request.user.is_authenticated or not request.user.is_superuser:
+          
+            return redirect('/staff')
+        return func(request, *args, **kwargs)
+    return wrapper
+
+
 def index(request):
     return render(request,'index.html')
 
+@check_login_adm
 def home(request):
     return render(request,'adm/home.html')
 
-def check_login_medico(func):
-    def wrapper(request, *args, **kwargs):
-        if 'medico_cpf' not in request.session:
-            return redirect('medicos/login_medico')
-        return func(request, *args, **kwargs)
-    return wrapper
+
 
 def login_medico(request):
     if request.method == 'POST':
@@ -33,34 +47,33 @@ def login_medico(request):
 
         except Médico.DoesNotExist:
             messages.error(request, 'CPF inválido ou não cadastrado.')
-            return redirect('login_medico')
+            return redirect('/login_medico')
 
     return render(request, 'medico/login_medico.html')
 
 @check_login_medico
 def agenda_medica(request):
     medico_id = request.session.get('medico_id')
-
     if medico_id:
         try:
             medico = Médico.objects.get(id=medico_id)
-            hoje = datetime.now()
-
-            consultas_futuras = Consulta.objects.filter(id_medico=medico, data_consulta__gte=hoje)
-            consultas_passadas = Consulta.objects.filter(id_medico=medico, data_consulta__lt=hoje)
-
+            consultas = Consulta.objects.filter(id_medico=medico).order_by('data_consulta')
+            consultas_futuras = consultas.filter(data_consulta__gte=datetime.now())
+            consultas_passadas = consultas.filter(data_consulta__lt=datetime.now())
             return render(request, 'medico/consultas/agenda_medica.html', {
                 'medico': medico,
                 'consultas_futuras': consultas_futuras,
                 'consultas_passadas': consultas_passadas
             })
-
         except Médico.DoesNotExist:
             messages.error(request, 'Erro ao recuperar os dados do médico.')
-            return redirect('login_medico')
+            return redirect('/login_medico')
+        except Exception as e:
+            messages.error(request, 'Erro interno.')
+            return redirect('/login_medico')
     else:
         messages.error(request, 'Faça login para acessar esta página.')
-        return redirect('login_medico')
+        return redirect('/login_medico')
 
 @check_login_medico
 def detalhar_consulta_medico(request, id):
@@ -73,12 +86,12 @@ def editar_consulta_medico(request, id):
     consulta = get_object_or_404(Consulta, id=id)
 
     if request.method == 'POST':
-        # Atualizando os campos que podem ser editados
+
         diagnostico = request.POST.get('diagnostico')
         observacao = request.POST.get('observacao')
         medicamento_id = request.POST.get('medicamento')
 
-        # Salvando as atualizações
+       
         consulta.diagnostico = diagnostico
         consulta.observacao = observacao
         if medicamento_id:
@@ -88,7 +101,7 @@ def editar_consulta_medico(request, id):
         messages.success(request, 'Consulta atualizada com sucesso!')
         return redirect('agenda_medica')
 
-    remedios = Remédio.objects.all()  # Carregando todos os remédios para o select
+    remedios = Remédio.objects.all()
 
     return render(request, 'medico/consultas/editar_consulta_medico.html', {
         'consulta': consulta,
@@ -132,14 +145,14 @@ def pesquisar_consulta(request):
     if cpf:
         try:
             paciente = Paciente.objects.get(cpf=cpf)
-            # Busca consultas associadas ao paciente
+           
             consultas = Consulta.objects.filter(id_paciente=paciente)
             return render(request, 'paciente/Pesquisar_consultas.html', {'paciente': paciente, 'consultas': consultas})
         except Paciente.DoesNotExist:
             messages.error(request, 'Erro ao recuperar dados do paciente.')
             return redirect('login_paciente')
     else:
-        # Redireciona para login se o CPF não estiver na sessão
+        
         messages.error(request, 'Faça login para acessar esta página.')
         return redirect('login_paciente')
 
@@ -149,14 +162,17 @@ def custom_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
+        if not username or not password:
+            messages.error(request, 'Preencha todos os campos.')
+            return render(request, 'adm/login.html')
+    
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
             if user.is_superuser:
                 login(request, user)
                 messages.success(request, 'Bem-vindo à área da equipe, superusuário!')
-                return redirect('Home') 
+                return redirect('/Home') 
             else:
                 messages.error(request, 'Você não tem permissão para acessar esta área.')
         else:
