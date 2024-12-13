@@ -1,0 +1,92 @@
+{% extends 'medico/base_medico.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultas - Médico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-4">
+        <h2 class="text-center mb-4">Consultas</h2>
+
+        {% if consultas_futuras %}
+            <h4>Consultas Futuras:</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>CPF</th>
+                        <th>Sintomas</th>
+                        <th>Medicação</th>
+                        <th>Data da Consulta</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consulta in consultas_futuras %}
+                    <tr>
+                        <td>{{ consulta.id_paciente.nome }}</td>
+                        <td>{{ consulta.id_paciente.cpf }}</td>
+                        <td>{{ consulta.sintoma }}</td>
+                        <td>{{ consulta.id_medicação.nome | default:"Não receitado"}}</td>
+                        <td>{{ consulta.data_consulta }}</td>
+                        <td>
+                            <a href="{% url 'detalhar_consulta_medico' consulta.id %}" class="btn btn-info btn-sm">
+                                <i class="fa fa-info" aria-hidden="true"></i>
+                              </a>
+                            <a href="{% url 'editar_consulta_medico' consulta.id %}" class="btn btn-warning btn-sm">
+                              <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="alert alert-info">Não há consultas futuras agendadas.</p>
+        {% endif %}
+
+        {% if consultas_passadas %}
+            <h4>Consultas Passadas:</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>CPF</th>
+                        <th>Sintomas</th>
+                        <th>Medicação</th>
+                        <th>Data da Consulta</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consulta in consultas_passadas %}
+                        <tr>
+                            <td>{{ consulta.id_paciente.nome }}</td>
+                            <td>{{ consulta.id_paciente.cpf }}</td>
+                            <td>{{ consulta.sintoma }}</td>
+                            <td>{{ consulta.id_medicação.nome | default:"Não receitado"}}</td>
+                            <td>{{ consulta.data_consulta }}</td>
+                            <td>
+                                <a href="{% url 'detalhar_consulta_medico' consulta.id %}" class="btn btn-info btn-sm">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                  </a>
+                                <a href="{% url 'editar_consulta_medico' consulta.id %}" class="btn btn-warning btn-sm">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="alert alert-info">Não há consultas passadas registradas.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+{% endblock %}

@@ -86,15 +86,14 @@
        
             {% if messages %}
             {% for message in messages %}
-                <p style="color: green;">{{ message }}</p>
-                <p style="color: red;">{{ message }}</p>""
+                <script>alert({message})</script>
             {% endfor %}
         {% endif %}
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            
-            <button type="submit">Cadastrar</button>
+            <input type="hidden" id="sintoma" name="sintoma" />
+            <button type="submit">Marcar Consulta</button>
         </form>
         
     </section>

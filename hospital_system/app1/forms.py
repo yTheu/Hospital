@@ -1,6 +1,9 @@
 from django import forms
 from app1.models import Paciente, Consulta, Médico, Enfermeiro, Remédio
 
+class LoginPacienteForm(forms.Form):
+    cpf = forms.CharField(max_length=11, label="CPF")
+
 class PacienteForm(forms.ModelForm):
     class Meta:
         model = Paciente
@@ -29,7 +32,6 @@ class MedicoForm(forms.ModelForm):
             raise forms.ValidationError('Já existe um médico com este CPF.')
         return cpf
 
-
 class EnfermeiroForm(forms.ModelForm):
     class Meta:
         model = Enfermeiro
@@ -52,8 +54,6 @@ class RemedioForm(forms.ModelForm):
         model = Remédio
         fields = ['nome', 'laboratorio', 'bula', 'tipo', 'quantidade_estoque', 'data_validade']
 
-    
-
     data_validade = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'})
     )
@@ -61,8 +61,16 @@ class RemedioForm(forms.ModelForm):
 class ConsultaForm(forms.ModelForm):
     class Meta:
         model = Consulta
-        fields = ['id_paciente', 'sintoma', 'id_enfermeiro', 'id_medico', 'id_medicação', 'data_consulta']
-
-    data_consulta = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'})
-    )
+        fields = ['id_paciente', 'id_enfermeiro', 'id_medico', 'id_medicação', 'data_consulta', 'observacao', 'diagnostico']
+        labels = {
+            'id_paciente': 'Paciente',
+            'id_enfermeiro': 'Enfermeiro',
+            'id_medico': 'Médico',
+            'id_medicação': 'Medicação',
+            'data_consulta': 'Data da Consulta',
+            'observacao': 'Observações',
+            'diagnostico': 'Diagnóstico'
+        }
+        widgets = {
+            'data_consulta': forms.DateInput(attrs={'type': 'date'})
+        }

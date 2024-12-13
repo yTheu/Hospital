@@ -1,39 +1,168 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
+from django.http import HttpResponse, Http404
+from django.contrib.auth import authenticate, login, logout
 from app1.models import Médico, Enfermeiro, Paciente, Remédio, Consulta
 from app1.forms import PacienteForm, ConsultaForm, MedicoForm, EnfermeiroForm, RemedioForm
 from django.contrib import messages
 from django.db.models.deletion import ProtectedError
+from datetime import datetime
 
 def index(request):
     return render(request,'index.html')
+
 def home(request):
     return render(request,'adm/home.html')
+
+def check_login_medico(func):
+    def wrapper(request, *args, **kwargs):
+        if 'medico_cpf' not in request.session:
+            return redirect('medicos/login_medico')
+        return func(request, *args, **kwargs)
+    return wrapper
+
 def login_medico(request):
-    return render(request,'login_medico.html')
-def login_paciente(request):
-    return render(request,'login_paciente.html')
+    if request.method == 'POST':
+        cpf = request.POST.get('cpf')
+        
+        try:
+            
+            medico = Médico.objects.get(cpf=cpf)
+            request.session['medico_id'] = medico.id
+            messages.success(request, f'Bem-vindo, Dr(a). {medico.nome}!')
+            return redirect('agenda_medica')
+
+        except Médico.DoesNotExist:
+            messages.error(request, 'CPF inválido ou não cadastrado.')
+            return redirect('login_medico')
+
+    return render(request, 'medico/login_medico.html')
+
+@check_login_medico
 def agenda_medica(request):
-    return render(request,'Agenda_medica.html')
+    medico_id = request.session.get('medico_id')
+
+    if medico_id:
+        try:
+            medico = Médico.objects.get(id=medico_id)
+            hoje = datetime.now()
+
+            consultas_futuras = Consulta.objects.filter(id_medico=medico, data_consulta__gte=hoje)
+            consultas_passadas = Consulta.objects.filter(id_medico=medico, data_consulta__lt=hoje)
+
+            return render(request, 'medico/consultas/agenda_medica.html', {
+                'medico': medico,
+                'consultas_futuras': consultas_futuras,
+                'consultas_passadas': consultas_passadas
+            })
+
+        except Médico.DoesNotExist:
+            messages.error(request, 'Erro ao recuperar os dados do médico.')
+            return redirect('login_medico')
+    else:
+        messages.error(request, 'Faça login para acessar esta página.')
+        return redirect('login_medico')
+
+@check_login_medico
+def detalhar_consulta_medico(request, id):
+    consulta = get_object_or_404(Consulta, id=id)
+    
+    return render(request, 'medico/consultas/detalhar_consulta_medico.html', {'consulta': consulta})
+
+
+def editar_consulta_medico(request, id):
+    consulta = get_object_or_404(Consulta, id=id)
+
+    if request.method == 'POST':
+        # Atualizando os campos que podem ser editados
+        diagnostico = request.POST.get('diagnostico')
+        observacao = request.POST.get('observacao')
+        medicamento_id = request.POST.get('medicamento')
+
+        # Salvando as atualizações
+        consulta.diagnostico = diagnostico
+        consulta.observacao = observacao
+        if medicamento_id:
+            consulta.id_medicação = Remédio.objects.get(id=medicamento_id)
+        
+        consulta.save()
+        messages.success(request, 'Consulta atualizada com sucesso!')
+        return redirect('agenda_medica')
+
+    remedios = Remédio.objects.all()  # Carregando todos os remédios para o select
+
+    return render(request, 'medico/consultas/editar_consulta_medico.html', {
+        'consulta': consulta,
+        'remedios': remedios
+    })
+
+
+def login_paciente(request):
+    if request.method == 'POST':
+        cpf = request.POST.get('cpf')
+
+        try:
+            paciente = Paciente.objects.get(cpf=cpf)
+            
+            request.session['paciente_cpf'] = cpf
+            messages.success(request, f'Bem-vindo, {paciente.nome}!')
+            return redirect('pesquisar_consulta')
+        except Paciente.DoesNotExist:
+            messages.error(request, 'CPF inválido ou não cadastrado.')
+
+    return render(request, 'paciente/login_paciente.html')
+
+
+
+def lista_remedios_medico(request):
+    
+    remedios = Remédio.objects.all()
+    return render(request, 'medico/remedios/lista_remedios_medico.html', {'remedios': remedios})
+
+def logout_paciente(request):
+    logout(request)
+    return redirect('/')
+
+def lista_pacientes(request):
+    pacientes = Paciente.objects.all()
+    return render(request, 'medico/pacientes/lista_pacientes.html', {'pacientes': pacientes})
+
 def pesquisar_consulta(request):
-    return render(request,'Pesquisar_consultas.html')
+    cpf = request.session.get('paciente_cpf')
+    
+    if cpf:
+        try:
+            paciente = Paciente.objects.get(cpf=cpf)
+            # Busca consultas associadas ao paciente
+            consultas = Consulta.objects.filter(id_paciente=paciente)
+            return render(request, 'paciente/Pesquisar_consultas.html', {'paciente': paciente, 'consultas': consultas})
+        except Paciente.DoesNotExist:
+            messages.error(request, 'Erro ao recuperar dados do paciente.')
+            return redirect('login_paciente')
+    else:
+        # Redireciona para login se o CPF não estiver na sessão
+        messages.error(request, 'Faça login para acessar esta página.')
+        return redirect('login_paciente')
 
 
 
 def custom_login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
-            login(request, user)
-            messages.success(request, 'Bem-vindo à área da equipe!')
-            return redirect('')
+            if user.is_superuser:
+                login(request, user)
+                messages.success(request, 'Bem-vindo à área da equipe, superusuário!')
+                return redirect('Home') 
+            else:
+                messages.error(request, 'Você não tem permissão para acessar esta área.')
         else:
             messages.error(request, 'Credenciais inválidas.')
     
-    return render(request, 'login.html')
+    return render(request, 'adm/login.html')
 
 # ---------- Pacientes ---------- 
 
@@ -95,10 +224,10 @@ def consultas(request):
 
 def marcarConsulta(request):
     if request.method == 'POST':
-
         form = ConsultaForm(request.POST)
         if form.is_valid():
             consulta = form.save(commit=False)
+            consulta.sintoma = consulta.id_paciente.sintoma
             consulta.save()
             messages.success(request, 'Consulta marcada com sucesso')
             return redirect('consultas')

@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import UniqueConstraint
-from django.db import models
+from django.contrib.auth.models import User
 
 class Paciente(models.Model):
     class Situacao(models.TextChoices):
@@ -14,6 +14,7 @@ class Paciente(models.Model):
         CONSULTA = 'Em Consulta', 'Em Consulta'
         ALTA = 'Alta', 'Alta'
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     nome = models.CharField(max_length=100, blank=False)
     sintoma = models.CharField(max_length=300, blank=False)
     situacao = models.CharField(max_length=12, choices=Situacao.choices, default=Situacao.ESTAVEL, blank=False)
@@ -34,24 +35,24 @@ class Paciente(models.Model):
 
 class Médico(models.Model):
     GENERO = [
-        ('F', 'Feminino'),
-        ('M', 'Masculino'),
-        ('O', 'Outro'),
+        ('Feminino', 'Feminino'),
+        ('Masculino', 'Masculino'),
+        ('Outro', 'Outro'),
     ]
 
     ESPECIALIZACAO = [
-        ('CLINICA_GERAL', 'Clínica Geral'),
-        ('PEDIATRIA', 'Pediatria'),
-        ('GINECOLOGIA', 'Ginecologia'),
-        ('CARDIOLOGIA', 'Cardiologia'),
-        ('ORTOPEDIA', 'Ortopedia'),
+        ('Clínica Geral', 'Clínica Geral'),
+        ('Pediatria', 'Pediatria'),
+        ('Ginecologia', 'Ginecologia'),
+        ('Cardiologia', 'Cardiologia'),
+        ('Ortopedia', 'Ortopedia'),
     ]
 
     TURNO = [
-        ('M', 'Manhã'),
-        ('T', 'Tarde'),
-        ('N', 'Noite'),
-        ('F', 'Flexível'),
+        ('Manhã', 'Manhã'),
+        ('Tarde', 'Tarde'),
+        ('Noite', 'Noite'),
+        ('Flexível', 'Flexível'),
     ]
 
     nome = models.CharField(max_length=100, blank=False)
@@ -63,9 +64,9 @@ class Médico(models.Model):
     endereco = models.CharField(max_length=250, blank=False)
     telefone = models.CharField(max_length=10, blank=False)
     email = models.EmailField(max_length=150, blank=True, null=True)
-    genero = models.CharField(max_length=1, choices=GENERO, blank=True, null=True)
+    genero = models.CharField(max_length=9, choices=GENERO, blank=True, null=True)
     salario = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    turno = models.CharField(max_length=1, choices=TURNO, blank=True, null=True)
+    turno = models.CharField(max_length=8, choices=TURNO, blank=True, null=True)
     data_contratacao = models.DateTimeField(blank=False)
 
     def __str__(self):
@@ -73,16 +74,16 @@ class Médico(models.Model):
 
 class Enfermeiro(models.Model):
     TURNO = [
-        ('M', 'Manhã'),
-        ('T', 'Tarde'),
-        ('N', 'Noite'),
-        ('F', 'Flexível'),
+        ('Manhã', 'Manhã'),
+        ('Tarde', 'Tarde'),
+        ('Noite', 'Noite'),
+        ('Flexível', 'Flexível'),
     ]
 
     GENERO = [
-        ('F', 'Feminino'),
-        ('M', 'Masculino'),
-        ('O', 'Outro'),
+        ('Feminino', 'Feminino'),
+        ('Masculino', 'Masculino'),
+        ('Outro', 'Outro'),
     ]
 
     nome = models.CharField(max_length=100, blank=False)
@@ -95,9 +96,9 @@ class Enfermeiro(models.Model):
     data_contratacao = models.DateTimeField(blank=False)
 
     email = models.EmailField(max_length=150, blank=True, null=True)
-    genero = models.CharField(max_length=1, choices=GENERO, blank=True, null=True)
+    genero = models.CharField(max_length=9, choices=GENERO, blank=True, null=True)
     salario = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    turno = models.CharField(max_length=1, choices=TURNO, blank=True, null=True)
+    turno = models.CharField(max_length=8, choices=TURNO, blank=True, null=True)
     #foto = models.ImageField(upload_to='enfermeiros_fotos/', blank=True, null=True)
 
     def __str__(self):
@@ -123,7 +124,7 @@ class Remédio(models.Model):
         return self.nome
 
 class Consulta(models.Model):
-    estagio_consulta = models.CharField(max_length=12, choices=[('agendada', 'Agendada'), ('concluída', 'Concluída')], default='agendada')
+    estagio_consulta = models.CharField(max_length=12, choices=[('Agendada', 'Agendada'), ('Concluída', 'Concluída')], default='agendada')
     
     id_paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
     id_enfermeiro = models.ForeignKey(Enfermeiro, on_delete=models.PROTECT)
@@ -131,7 +132,9 @@ class Consulta(models.Model):
     id_medicação = models.ForeignKey(Remédio, on_delete=models.PROTECT, blank=True, null=True)
     sintoma = models.CharField(max_length=100, blank=False)
     data_consulta = models.DateTimeField()
-    
+    observacao = models.TextField(blank=True)
+    diagnostico = models.TextField()
+
     def __str__(self):
         return f"Consulta de {self.id_paciente} com {self.id_medico} em {self.data_consulta.strftime('%d/%m/%Y às %H:%M')}"
 

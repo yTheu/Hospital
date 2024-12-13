@@ -14,9 +14,8 @@
         <th>CPF</th>
         <th>Especialização</th>
         <th>Disponibilidade</th>
-        <th>Data de Nascimento</th>
-        <th>Endereço</th>
-        <th>Telefone</th>
+        <th>Turno</th>
+        <th>Situação</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -26,10 +25,9 @@
           <td>{{ medico.nome }}</td>
           <td>{{ medico.cpf }}</td>
           <td>{{ medico.especializacao }}</td>
-          <td>{{ medico.disponibilidade }}</td>
-          <td>{{ medico.data_nascimento }}</td>
-          <td>{{ medico.endereco }}</td>
-          <td>{{ medico.telefone }}</td>
+          <td>{{ medico.disponibilidade|yesno:"Sim,Não" }}</td>
+          <td>{{ medico.turno}}</td>
+          <td>{{ medico.situacao }}</td>
           <td>
             <a href="{% url 'detalharMedico' medico.id %}" class="btn btn-info btn-sm">
               <i class="fa fa-info" aria-hidden="true"></i>

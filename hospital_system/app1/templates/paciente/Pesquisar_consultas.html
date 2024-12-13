@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultas</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+  <header class="bg-primary text-white py-2">
+    <div class="container text-center">
+      <h3>Centro Hospitalar de Senhor do Bonfim</h3>
+    </div>
+  </header>
+
+  <div class="container mt-4 text-end">
+    <form action="{% url 'logout_paciente' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Sair</button>
+    </form>
+  </div>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Consultas</h2>
+
+    <table class="table table-bordered table-striped">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th>Paciente</th>
+          <th>CPF</th>
+          <th>Sintoma</th>
+          <th>Enfermeiro(a)</th>
+          <th>Médico</th>
+          <th>Remédio</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white">
+        {% if consultas %}
+          {% for consulta in consultas %}
+          <tr>
+            <td>{{ paciente.nome }}</td>
+            <td>{{ paciente.cpf }}</td>
+            <td>{{ consulta.sintoma }}</td>
+            <td>{{ consulta.id_enfermeiro.nome|default:"Não disponível" }}</td>
+            <td>{{ consulta.id_medico.nome|default:"Não disponível" }}</td>
+            <td>{{ consulta.id_medicação.nome|default:"Não receitado" }}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="7" class="text-center">Nenhuma consulta encontrada.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="bg-primary text-white py-2 mt-auto">
+    <div class="container text-center">
+      <p>&copy; 2024 Centro Hospitalar de Senhor do Bonfim - Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

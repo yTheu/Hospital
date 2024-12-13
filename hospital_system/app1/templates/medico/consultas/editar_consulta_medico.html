@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Consulta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Editar Consulta</h2>
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Exibindo os campos não editáveis -->
+            <div class="mb-3">
+                <label for="paciente" class="form-label">Paciente</label>
+                <input type="text" class="form-control" id="paciente" value="{{ consulta.id_paciente.nome }}" disabled>
+            </div>
+
+            <div class="mb-3">
+                <label for="enfermeiro" class="form-label">Enfermeiro</label>
+                <input type="text" class="form-control" id="enfermeiro" value="{{ consulta.id_enfermeiro.nome }}" disabled>
+            </div>
+
+            <div class="mb-3">
+                <label for="medico" class="form-label">Médico</label>
+                <input type="text" class="form-control" id="medico" value="{{ consulta.id_medico.nome }}" disabled>
+            </div>
+
+            <!-- Campo para selecionar a medicação -->
+            <div class="mb-3">
+                <label for="medicamento" class="form-label">Selecione um Remédio</label>
+                <select class="form-select" id="medicamento" name="medicamento">
+                    <option value="">Nenhum</option>
+                    {% for remedio in remedios %}
+                        <option value="{{ remedio.id }}" {% if consulta.id_medicação == remedio.id %}selected{% endif %}>{{ remedio.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Campo de Diagnóstico (Conclusões Médicas) -->
+            <div class="mb-3">
+                <label for="diagnostico" class="form-label">Diagnóstico</label>
+                <textarea class="form-control" id="diagnostico" name="diagnostico" rows="4">{{ consulta.diagnostico }}</textarea>
+            </div>
+
+            <!-- Campo de Observações -->
+            <div class="mb-3">
+                <label for="observacao" class="form-label">Observação</label>
+                <textarea class="form-control" id="observacao" name="observacao" rows="4">{{ consulta.observacao }}</textarea>
+            </div>
+
+            <!-- Data da consulta -->
+            <div class="mb-3">
+                <label for="data_consulta" class="form-label">Data da Consulta</label>
+                <input type="datetime-local" class="form-control" id="data_consulta" name="data_consulta" value="{{ consulta.data_consulta|date:'Y-m-d\TH:i' }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>

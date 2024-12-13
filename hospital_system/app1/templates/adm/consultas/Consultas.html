@@ -16,6 +16,8 @@
         <th>Enfermeiro(a)</th>
         <th>Médico</th>
         <th>Remédio</th>
+        <th>Observações</th>
+        <th>Data</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -28,6 +30,8 @@
           <td>{{ consulta.id_enfermeiro.nome }}</td>
           <td>{{ consulta.id_medico.nome }}</td>
           <td>{{ consulta.id_medicação.nome }}</td>
+          <td>{{ consulta.observacao }}</td>
+          <td>{{ consulta.data_consulta }}</td>
           <td>
             <a href="{% url 'editarConsulta' consulta.id %}" class="btn btn-warning btn-sm">
               <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -39,7 +43,7 @@
         </tr>
         {% empty %}
         <tr>
-          <td colspan="5" class="text-center">Nenhuma consulta encontrada.</td>
+          <td colspan="6" class="text-center">Nenhuma consulta encontrada.</td>
         </tr>
       {% endfor %}
     </tbody>
