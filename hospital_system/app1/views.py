@@ -124,8 +124,6 @@ def login_paciente(request):
 
     return render(request, 'paciente/login_paciente.html')
 
-
-
 def lista_remedios_medico(request):
     
     remedios = Remédio.objects.all()
@@ -155,8 +153,6 @@ def pesquisar_consulta(request):
         
         messages.error(request, 'Faça login para acessar esta página.')
         return redirect('login_paciente')
-
-
 
 def custom_login(request):
     if request.method == 'POST':
@@ -280,7 +276,6 @@ def apagarConsulta(request, id):
         messages.error(request, "Consulta não existe!")
         return redirect('consultas')
 
-    
 # ---------- Enfermeiros ---------- 
 
 def enfermeiros(request):
