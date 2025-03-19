@@ -50,13 +50,13 @@ python manage.py createsuperuser
 python manage.py runserver
  ```
 
-## Estrutura de Diretórios
+## 📁 Estrutura de Diretórios
 
 - `app1/`: Contém a aplicação principal com modelos, formulários, visualizações e templates.
 - `hospital_system/`: Contém as configurações do projeto Django.
 - `templates/`: Contém os templates HTML organizados por diretórios para cada tipo de usuário (adm, medico, paciente).
 
-## Modelos
+## 🗿 Modelos
 
 ### Paciente
 - `nome`
@@ -136,8 +136,9 @@ git commit -m "feat: adiciona nova feature"
 git push origin minha-feature
 
 # 5. Abra um Pull Request
+```
 
-## Colaboradores
+##  Colaboradores
 
 [@Lipe099](https://github.com/Lipe099) 
 [@yTheu]{hhtps://github.com/yTheu) 
