@@ -141,4 +141,4 @@ git push origin minha-feature
 ##  Colaboradores
 
 [![Lipe099](https://github.com/Lipe099.png?size=100)](https://github.com/Lipe099) 
-[![yTheu](https://github.com/yTheu)](https://github.com/yThey)
+[![yTheu](https://github.com/yTheu.png?size=100)](https://github.com/yThey)
