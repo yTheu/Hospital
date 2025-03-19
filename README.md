@@ -1,64 +1,55 @@
-# Sistema Hospitalar
+# 🏥 Sistema Hospitalar
 
-Este é um sistema hospitalar desenvolvido em Django para gerenciar pacientes, médicos, enfermeiros, consultas e medicamentos. O sistema permite que diferentes tipos de usuários (administradores, médicos e pacientes) acessem e gerenciem informações relevantes de acordo com suas permissões.
+[![Django](https://img.shields.io/badge/Django-4.x-green.svg)](https://www.djangoproject.com/)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/yTheu/Hospital)](https://github.com/yTheu/Hospital/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/yTheu/Hospital?style=social)](https://github.com/yTheu/Hospital/stargazers)
 
+Este é um sistema hospitalar desenvolvido com **Django**, criado para facilitar o gerenciamento de **pacientes**, **médicos**, **enfermeiros**, **consultas** e **medicamentos**.  
+O sistema permite que diferentes tipos de usuários (administradores, médicos e pacientes) acessem e gerenciem informações conforme suas permissões.
 
-## Funcionalidades
+---
 
-### Administrador
-- Gerenciamento de pacientes
-- Gerenciamento de médicos
-- Gerenciamento de enfermeiros
-- Gerenciamento de consultas
-- Gerenciamento de medicamentos
+## ⚙️ Funcionalidades
 
-### Médico
-- Visualização de consultas agendadas e passadas
-- Edição de consultas (diagnóstico, observações, medicação)
-- Visualização de lista de pacientes
-- Visualização de lista de medicamentos
+### 👩‍💼 Administrador
+- Gerenciamento de **pacientes**, **médicos**, **enfermeiros**
+- Gerenciamento de **consultas** e **medicamentos**
 
-### Paciente
-- Login utilizando CPF
-- Visualização de consultas agendadas e passadas
+### 🩺 Médico
+- Visualização e edição de **consultas**
+- Acesso à lista de **pacientes** e **medicamentos**
 
-## Instalação
+### 👤 Paciente
+- Login com **CPF**
+- Visualização de **consultas agendadas e anteriores**
 
-1. Clone o repositório:
-    ```sh
-    git clone https://github.com/yTheu/Hospital.git
-    cd Hospital
-    ```
+---
 
-2. Crie um ambiente virtual e ative-o:
-    ```sh
-    python -m venv venv
-    source venv/bin/activate  # No Windows use `venv\Scripts\activate`
-    ```
+## 🚀 Instalação
 
-3. Instale as dependências:
-    ```sh
-    pip install -r requirements.txt
-    ```
+```bash
+# 1. Clone o repositório
+git clone https://github.com/yTheu/Hospital.git
+cd Hospital
 
-4. Execute as migrações do banco de dados:
-    ```sh
-    python manage.py migrate
-    ```
+# 2. Crie e ative o ambiente virtual
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-5. Crie um superusuário para acessar a área administrativa:
-    ```sh
-    python manage.py createsuperuser
-    ```
+# 3. Instale as dependências
+pip install -r requirements.txt
 
-6. Inicie o servidor de desenvolvimento:
-    ```sh
-    python manage.py runserver
-    ```
+# 4. Aplique as migrações
+python manage.py migrate
 
-7. Acesse o sistema no navegador:
-    ```
-    http://127.0.0.1:8000/
+# 5. Crie o superusuário
+python manage.py createsuperuser
+
+# 6. Inicie o servidor
+python manage.py runserver
+
     ```
 
 ## Estrutura de Diretórios
@@ -128,10 +119,27 @@ Este é um sistema hospitalar desenvolvido em Django para gerenciar pacientes, m
 - `observacao`
 - `diagnostico`
 
-## Contribuição
+## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+Contribuições são muito bem-vindas!  
+Você pode abrir uma **issue** para sugerir melhorias ou enviar um **Pull Request (PR)** com novas funcionalidades ou correções.
+
+### Como contribuir:
+
+```bash
+# 1. Faça um fork do projeto
+# 2. Crie uma branch com a sua feature
+git checkout -b minha-feature
+
+# 3. Commit suas alterações
+git commit -m "feat: adiciona nova feature"
+
+# 4. Envie para o repositório remoto
+git push origin minha-feature
+
+# 5. Abra um Pull Request
 
 ## Colaboradores
 
-@lipe
+[@Lipe099](https://github.com/Lipe099) 
+[@yTheu]{hhtps://github.com/yTheu) 
