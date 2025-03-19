@@ -37,8 +37,8 @@ cd Hospital
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# 3. Instale as dependências
-pip install -r requirements.txt
+# 3. Instale o Django
+pip install django
 
 # 4. Aplique as migrações
 python manage.py migrate
