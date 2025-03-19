@@ -22,7 +22,7 @@ O sistema permite que diferentes tipos de usuários (administradores, médicos e
 
 ### 👤 Paciente
 - Login com **CPF**
-- Visualização de **consultas agendadas e anteriores**
+- Visualização de **consultas agendadas e anteriores, remédios prescritos e diagnósticos**
 
 ---
 
