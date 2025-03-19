@@ -2,7 +2,6 @@
 
 [![Django](https://img.shields.io/badge/Django-4.x-green.svg)](https://www.djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Contributors](https://img.shields.io/github/contributors/yTheu/Hospital)](https://github.com/yTheu/Hospital/graphs/contributors)
 [![Stars](https://img.shields.io/github/stars/yTheu/Hospital?style=social)](https://github.com/yTheu/Hospital/stargazers)
 
