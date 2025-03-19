@@ -48,8 +48,7 @@ python manage.py createsuperuser
 
 # 6. Inicie o servidor
 python manage.py runserver
-
-    ```
+ ```
 
 ## Estrutura de Diretórios
 
